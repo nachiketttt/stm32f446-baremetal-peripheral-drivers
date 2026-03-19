@@ -13,8 +13,8 @@ as with respect to the STM32F446RE reference manual.
 
 ## Structure
 ```
-inc_drivers/    — header files and device register definitions
-src_drivers/    — driver implementation files
+inc_drivers/    — header files and device register definition structs
+src_drivers/    — driver implementation files with the actual logic
 ```
 
 ## Drivers
