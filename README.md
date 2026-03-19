@@ -2,14 +2,14 @@
 
 Register-level peripheral drivers for the STM32F446RE 
 written from scratch using direct register manipulation. 
-No HAL, no CubeMX — every peripheral configured by 
+No HAL and no CubeMX — every peripheral was configured by 
 writing directly to control, status, and data registers 
-as defined in the STM32F446RE reference manual.
+as with respect to the STM32F446RE reference manual.
 
 ## Hardware
 - STM32 Nucleo F446RE
 - Logic analyzer (Saleae clone) for verification
-- PulseView / sigrok for protocol decode
+- PulseView for debugging 
 
 ## Structure
 ```
@@ -28,7 +28,7 @@ src_drivers/    — driver implementation files
 | RCC | stm32f44xx_rcc_driver.h | stm32f44xx_rcc_driver.c | Peripheral clock enable/disable, APB bus clock frequency calculation |
 
 **Device header:** `stm32f446rexx.h` — base addresses, 
-peripheral register structs, bit position definitions 
+peripheral register definition structs, bit position definitions 
 and IRQ numbers for STM32F446RE
 
 ## Key Implementation Details
@@ -38,14 +38,14 @@ and IRQ numbers for STM32F446RE
 - Interrupt-driven drivers use application callback pattern —
   `SPI_ApplicationEventCallBack`, `I2C_ApplicationEventCallBack` etc.
 - GPIO interrupt uses EXTI controller with SYSCFG port selection
-- SPI SSI and SSM bits handled explicitly to prevent MODF errors
+- SPI SSI and SSM bits are handled explicitly to prevent MODF errors
 - I2C driver handles both 7-bit addressing and repeated start condition
 - USART baud rate calculated from APB bus frequency via RCC driver
 
 ## Verified Against
 
 These drivers were tested in cross-device communication 
-projects against ESP32 WROOM as the second device:
+projects with an ESP32 WROOM as the second device:
 
 - [stm32-esp32-spi-cross-device](https://github.com/nachiketttt/stm32-esp32-spi-cross-device) — SPI simplex TX verified with logic analyzer
 - stm32-esp32-uart-cross-device — coming
