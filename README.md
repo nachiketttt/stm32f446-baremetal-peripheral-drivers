@@ -2,7 +2,7 @@
 
 Register-level peripheral drivers for the STM32F446RE 
 written from scratch using direct register manipulation. 
-Without HAL and CubeMX — every peripheral was configured by 
+Without HAL and CubeMX where every peripheral was configured by 
 coding directly to the control, status, and data registers 
 with respect to the STM32F446RE reference manual.
 
