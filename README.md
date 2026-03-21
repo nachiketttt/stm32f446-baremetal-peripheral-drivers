@@ -13,8 +13,8 @@ with respect to the STM32F446RE reference manual.
 
 ## Structure
 ```
-inc_drivers/    — header files and device register definition structs
-src_drivers/    — driver implementation files with the actual logic
+inc_drivers/:     header files and device register definition structs
+src_drivers/:     driver implementation files with the actual logic
 ```
 
 ## Drivers
@@ -27,15 +27,15 @@ src_drivers/    — driver implementation files with the actual logic
 | USART | stm32f44xx_USART_driver.h | stm32f44xx_USART_driver.c | TX/RX polling and interrupt modes, baud rate config, word length, parity, stop bits |
 | RCC | stm32f44xx_rcc_driver.h | stm32f44xx_rcc_driver.c | Peripheral clock enable/disable, APB bus clock frequency calculation |
 
-**Device header:** `stm32f446rexx.h` — base addresses, 
+**Device header:** `stm32f446rexx.h`  base addresses, 
 peripheral register definition structs, bit position definitions 
 and IRQ numbers for STM32F446RE
 
 ## Key Implementation Details
 
-- All drivers follow a handle-based API —
+- All drivers follow a handle-based API which consists of
   peripheral config struct + pointer to peripheral base address
-- Interrupt-driven drivers use application callback pattern —
+- Interrupt-driven drivers use application callback pattern like
   `SPI_ApplicationEventCallBack`, `I2C_ApplicationEventCallBack` etc.
 - GPIO interrupt uses EXTI controller with SYSCFG port selection
 - SPI SSI and SSM bits are handled explicitly to prevent MODF errors
@@ -47,14 +47,14 @@ and IRQ numbers for STM32F446RE
 These drivers were tested in cross-device communication 
 projects with an ESP32 WROOM as the second device:
 
-- [stm32-esp32-spi-cross-device](https://github.com/nachiketttt/stm32-esp32-spi-cross-device) — SPI simplex TX verified with logic analyzer
-- stm32-esp32-uart-cross-device — coming
-- stm32-esp32-i2c-cross-device — coming
+- [stm32-esp32-spi-cross-device](https://github.com/nachiketttt/stm32-esp32-spi-cross-device) : SPI simplex TX verified with logic analyzer
+- stm32-esp32-uart-cross-device : coming
+- stm32-esp32-i2c-cross-device : coming
 
 ## A Problem I Solved
 
 SPI MODF (Mode Fault) error fired immediately on 
-`SPI_PeripheralControl(ENABLE)` — traced to PA4 NSS pin 
+`SPI_PeripheralControl(ENABLE)` which was traced to PA4 NSS pin 
 defaulting LOW before explicit GPIO write. Fixed by 
 driving NSS HIGH before enabling SPI peripheral. 
 SSM=1 and SSI=1 required in software NSS mode to prevent 
