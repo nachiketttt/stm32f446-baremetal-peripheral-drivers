@@ -38,7 +38,7 @@ src_drivers/    - driver implementation files
 
 ## Based On
 
-This project follows the [Mastering Microcontroller and Embedded Driver Development](https://www.udemy.com/course/mastering-microcontroller-with-embedded-driver-development/) course by FastBit Embedded Brain Academy and Kiran Nayak on Udemy.
+This project follows the [Mastering Microcontroller and Embedded Driver Development](https://www.udemy.com/course/mastering-microcontroller-with-peripheral-driver-development/) course by FastBit Embedded Brain Academy and Kiran Nayak on Udemy.
 
 ## Verified Against
 
